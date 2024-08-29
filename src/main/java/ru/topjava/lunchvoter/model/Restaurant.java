@@ -1,6 +1,7 @@
 package ru.topjava.lunchvoter.model;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Restaurant {
     private List<Menu> menus;
 
     @Column(name = "created_at", nullable = false)
+    @CreatedDate
     private LocalDateTime createdAt;
 
     // TODO Getters and Setters

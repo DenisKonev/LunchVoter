@@ -1,6 +1,7 @@
 package ru.topjava.lunchvoter.model;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -20,8 +21,9 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @Column(name = "registered_at", nullable = false)
-    private LocalDateTime registeredAt;
+    @Column(name = "createdAt", nullable = false)
+    @CreatedDate
+    private LocalDateTime createdAt;
 
     // TODO Getters and Setters
 }
