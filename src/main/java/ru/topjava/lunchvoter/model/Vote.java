@@ -1,17 +1,17 @@
 package ru.topjava.lunchvoter.model;
 
-import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "votes")
-public class Vote {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@Getter
+@Setter
+public class Vote extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -19,10 +19,4 @@ public class Vote {
     @OneToOne
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
-
-    @Column(name = "created_at", nullable = false)
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    // TODO Getters and Setters
 }

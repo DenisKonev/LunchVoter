@@ -1,17 +1,16 @@
 package ru.topjava.lunchvoter.model;
 
-import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@Getter
+@Setter
+public class User extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -20,10 +19,4 @@ public class User {
 
     @Column(nullable = false)
     private String role;
-
-    @Column(name = "createdAt", nullable = false)
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    // TODO Getters and Setters
 }

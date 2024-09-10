@@ -1,18 +1,16 @@
 package ru.topjava.lunchvoter.model;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "menu_items")
-public class MenuItem {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@Getter
+@Setter
+public class MenuItem extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "menu_id", nullable = false)
     private Menu menu;
@@ -22,10 +20,4 @@ public class MenuItem {
 
     @Column(nullable = false)
     private BigDecimal price;
-
-    @Column(name = "created_at", nullable = false)
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    // TODO Getters and Setters
 }

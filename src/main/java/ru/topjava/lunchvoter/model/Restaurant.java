@@ -1,27 +1,19 @@
 package ru.topjava.lunchvoter.model;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
-public class Restaurant {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@Getter
+@Setter
+public class Restaurant extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Menu> menus;
-
-    @Column(name = "created_at", nullable = false)
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    // TODO Getters and Setters
 }
