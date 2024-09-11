@@ -31,48 +31,48 @@ class MenuItemRepositoryTest {
     void saveNewMenuItem() {
         MenuItem newMenuItem = new MenuItem();
         newMenuItem.setName("Pizza");
-        when(crudMenuRepository.getReferenceById(MENU_ID)).thenReturn(createTestMenu());
+        when(crudMenuRepository.getReferenceById(MENU_ID_1)).thenReturn(createMenu1());
         when(crudMenuItemRepository.save(newMenuItem)).thenReturn(newMenuItem);
-        MenuItem savedMenuItem = menuItemRepository.save(newMenuItem, MENU_ID);
+        MenuItem savedMenuItem = menuItemRepository.save(newMenuItem, MENU_ID_1);
         assertNotNull(savedMenuItem);
         assertEquals("Pizza", savedMenuItem.getName());
-        verify(crudMenuRepository, times(1)).getReferenceById(MENU_ID);
+        verify(crudMenuRepository, times(1)).getReferenceById(MENU_ID_1);
         verify(crudMenuItemRepository, times(1)).save(newMenuItem);
     }
 
     @Test
     void deleteMenuItem() {
-        when(crudMenuItemRepository.delete(MENU_ITEM_ID_1, MENU_ID)).thenReturn(1);
-        boolean result = menuItemRepository.delete(MENU_ITEM_ID_1, MENU_ID);
+        when(crudMenuItemRepository.delete(MENU_ITEM_ID_1, MENU_ID_1)).thenReturn(1);
+        boolean result = menuItemRepository.delete(MENU_ITEM_ID_1, MENU_ID_1);
         assertTrue(result);
-        verify(crudMenuItemRepository, times(1)).delete(MENU_ITEM_ID_1, MENU_ID);
+        verify(crudMenuItemRepository, times(1)).delete(MENU_ITEM_ID_1, MENU_ID_1);
     }
 
     @Test
     void getMenuItemByIdAndMenuId() {
         when(crudMenuItemRepository.findById(MENU_ITEM_ID_1)).thenReturn(Optional.of(createMenuItem1()));
-        MenuItem fetchedMenuItem = menuItemRepository.get(MENU_ITEM_ID_1, MENU_ID);
+        MenuItem fetchedMenuItem = menuItemRepository.get(MENU_ITEM_ID_1, MENU_ID_1);
         assertNotNull(fetchedMenuItem);
         assertEquals(MENU_ITEM_ID_1, fetchedMenuItem.getId());
-        assertEquals(MENU_ID, fetchedMenuItem.getMenu().getId());
+        assertEquals(MENU_ID_1, fetchedMenuItem.getMenu().getId());
         verify(crudMenuItemRepository, times(1)).findById(MENU_ITEM_ID_1);
     }
 
     @Test
     void getAllMenuItemsByMenuId() {
-        when(crudMenuItemRepository.getAllByMenuId(MENU_ID)).thenReturn(createMenuItems());
-        List<MenuItem> fetchedMenuItems = menuItemRepository.getAll(MENU_ID);
+        when(crudMenuItemRepository.getAllByMenuId(MENU_ID_1)).thenReturn(createMenuItems());
+        List<MenuItem> fetchedMenuItems = menuItemRepository.getAll(MENU_ID_1);
         assertNotNull(fetchedMenuItems);
         assertEquals(2, fetchedMenuItems.size());
-        verify(crudMenuItemRepository, times(1)).getAllByMenuId(MENU_ID);
+        verify(crudMenuItemRepository, times(1)).getAllByMenuId(MENU_ID_1);
     }
 
     @Test
     void getWithMenu() {
-        when(crudMenuItemRepository.getWithMenu(MENU_ITEM_ID_1, MENU_ID)).thenReturn(createMenuItem1());
-        MenuItem result = menuItemRepository.getWithMenu(MENU_ITEM_ID_1, MENU_ID);
+        when(crudMenuItemRepository.getWithMenu(MENU_ITEM_ID_1, MENU_ID_1)).thenReturn(createMenuItem1());
+        MenuItem result = menuItemRepository.getWithMenu(MENU_ITEM_ID_1, MENU_ID_1);
         assertNotNull(result);
         assertEquals(MENU_ITEM_ID_1, result.getId());
-        verify(crudMenuItemRepository, times(1)).getWithMenu(MENU_ITEM_ID_1, MENU_ID);
+        verify(crudMenuItemRepository, times(1)).getWithMenu(MENU_ITEM_ID_1, MENU_ID_1);
     }
 }

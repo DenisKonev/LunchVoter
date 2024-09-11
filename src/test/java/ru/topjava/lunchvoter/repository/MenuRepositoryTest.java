@@ -30,7 +30,7 @@ class MenuRepositoryTest {
     @Test
     void saveNewMenu() {
         Menu newMenu = new Menu();
-        when(crudRestaurantRepository.getReferenceById(RESTAURANT_ID_1)).thenReturn(createTestRestaurant());
+        when(crudRestaurantRepository.getReferenceById(RESTAURANT_ID_1)).thenReturn(createRestaurant1());
         when(crudMenuRepository.save(newMenu)).thenReturn(newMenu);
         Menu savedMenu = menuRepository.save(newMenu, RESTAURANT_ID_1);
         assertNotNull(savedMenu);
@@ -41,24 +41,24 @@ class MenuRepositoryTest {
 
     @Test
     void deleteMenu() {
-        when(crudMenuRepository.delete(MENU_ID, RESTAURANT_ID_1)).thenReturn(1);
-        assertTrue(menuRepository.delete(MENU_ID, RESTAURANT_ID_1));
-        verify(crudMenuRepository, times(1)).delete(MENU_ID, RESTAURANT_ID_1);
+        when(crudMenuRepository.delete(MENU_ID_1, RESTAURANT_ID_1)).thenReturn(1);
+        assertTrue(menuRepository.delete(MENU_ID_1, RESTAURANT_ID_1));
+        verify(crudMenuRepository, times(1)).delete(MENU_ID_1, RESTAURANT_ID_1);
     }
 
     @Test
     void getMenuByIdAndRestaurantId() {
-        when(crudMenuRepository.findById(MENU_ID)).thenReturn(Optional.of(createTestMenu()));
-        Menu fetchedMenu = menuRepository.get(MENU_ID, RESTAURANT_ID_1);
+        when(crudMenuRepository.findById(MENU_ID_1)).thenReturn(Optional.of(createMenu1()));
+        Menu fetchedMenu = menuRepository.get(MENU_ID_1, RESTAURANT_ID_1);
         assertNotNull(fetchedMenu);
-        assertEquals(MENU_ID, fetchedMenu.getId());
+        assertEquals(MENU_ID_1, fetchedMenu.getId());
         assertEquals(RESTAURANT_ID_1, fetchedMenu.getRestaurant().getId());
-        verify(crudMenuRepository, times(1)).findById(MENU_ID);
+        verify(crudMenuRepository, times(1)).findById(MENU_ID_1);
     }
 
     @Test
     void getAllMenusByRestaurantId() {
-        when(crudMenuRepository.getAllByRestaurantId(RESTAURANT_ID_1)).thenReturn(createTestMenus());
+        when(crudMenuRepository.getAllByRestaurantId(RESTAURANT_ID_1)).thenReturn(createMenus());
         List<Menu> fetchedMenus = menuRepository.getAll(RESTAURANT_ID_1);
         assertNotNull(fetchedMenus);
         assertEquals(2, fetchedMenus.size());
@@ -67,10 +67,10 @@ class MenuRepositoryTest {
 
     @Test
     void getWithRestaurant() {
-        when(crudMenuRepository.getWithRestaurant(MENU_ID, RESTAURANT_ID_1)).thenReturn(createTestMenu());
-        Menu result = menuRepository.getWithRestaurant(MENU_ID, RESTAURANT_ID_1);
+        when(crudMenuRepository.getWithRestaurant(MENU_ID_1, RESTAURANT_ID_1)).thenReturn(createMenu1());
+        Menu result = menuRepository.getWithRestaurant(MENU_ID_1, RESTAURANT_ID_1);
         assertNotNull(result);
-        assertEquals(MENU_ID, result.getId());
-        verify(crudMenuRepository, times(1)).getWithRestaurant(MENU_ID, RESTAURANT_ID_1);
+        assertEquals(MENU_ID_1, result.getId());
+        verify(crudMenuRepository, times(1)).getWithRestaurant(MENU_ID_1, RESTAURANT_ID_1);
     }
 }

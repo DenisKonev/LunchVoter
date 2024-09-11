@@ -7,7 +7,8 @@ import java.util.List;
 
 @UtilityClass
 public class TestData {
-    public static final Integer MENU_ID = 1;
+    public static final Integer MENU_ID_1 = 1;
+    public static final Integer MENU_ID_2 = 2;
     public static final Integer MENU_ITEM_ID_1 = 1;
     public static final Integer MENU_ITEM_ID_2 = 2;
     public static final Integer RESTAURANT_ID_1 = 1;
@@ -31,6 +32,12 @@ public class TestData {
         return restaurant;
     }
 
+    public static Restaurant createRestaurantWithoutId() {
+        Restaurant restaurant = new Restaurant();
+        restaurant.setName("Burger Queen");
+        return restaurant;
+    }
+
     public static List<Restaurant> createRestaurants() {
         return List.of(createRestaurant1(), createRestaurant2());
     }
@@ -49,29 +56,36 @@ public class TestData {
         return user;
     }
 
+    public static User createUserWithoutId() {
+        User user = new User();
+        user.setUsername("jake_smith");
+        return user;
+    }
+
     public static List<User> createUsers() {
         return List.of(createUser1(), createUser2());
     }
 
-    public static Restaurant createTestRestaurant() {
-        Restaurant restaurant = new Restaurant();
-        restaurant.setId(RESTAURANT_ID_1);
-        return restaurant;
-    }
-
-    public static Menu createTestMenu() {
+    public static Menu createMenu1() {
         Menu menu = new Menu();
-        menu.setId(MENU_ID);
-        menu.setRestaurant(createTestRestaurant());
+        menu.setId(MENU_ID_1);
+        menu.setRestaurant(createRestaurant1());
         return menu;
     }
 
-    public static List<Menu> createTestMenus() {
-        Menu menu1 = createTestMenu();
+    public static Menu createMenu2() {
+        Menu menu = new Menu();
+        menu.setId(MENU_ID_2);
+        menu.setRestaurant(createRestaurant2());
+        return menu;
+    }
+
+    public static List<Menu> createMenus() {
+        Menu menu1 = createMenu1();
         menu1.setId(1);
-        Menu menu2 = new Menu();
+        Menu menu2 = createMenu2();
         menu2.setId(2);
-        menu2.setRestaurant(createTestRestaurant());
+        menu2.setRestaurant(createRestaurant1());
         return List.of(menu1, menu2);
     }
 
@@ -79,7 +93,7 @@ public class TestData {
         MenuItem menuItem = new MenuItem();
         menuItem.setId(MENU_ITEM_ID_1);
         menuItem.setName("Pizza");
-        menuItem.setMenu(createTestMenu());
+        menuItem.setMenu(createMenu1());
         return menuItem;
     }
 
@@ -87,7 +101,7 @@ public class TestData {
         MenuItem menuItem = new MenuItem();
         menuItem.setId(MENU_ITEM_ID_2);
         menuItem.setName("Pasta");
-        menuItem.setMenu(createTestMenu());
+        menuItem.setMenu(createMenu2());
         return menuItem;
     }
 
@@ -96,16 +110,25 @@ public class TestData {
     }
 
     public static Vote createVote1() {
-        Vote vote = new Vote();
-        vote.setId(VOTE_ID_1);
-        vote.setUser(createUser1());
-        return vote;
+        return createVoteWithId(VOTE_ID_1, createUser1());
     }
 
     public static Vote createVote2() {
+        return createVoteWithId(VOTE_ID_2, createUser2());
+    }
+
+    public static Vote createVoteWithoutId() {
+        return createVote(null, createUser1());
+    }
+
+    private static Vote createVoteWithId(Integer id, User user) {
+        return createVote(id, user);
+    }
+
+    private static Vote createVote(Integer id, User user) {
         Vote vote = new Vote();
-        vote.setId(VOTE_ID_2);
-        vote.setUser(createUser2());
+        vote.setId(id);
+        vote.setUser(user);
         return vote;
     }
 
