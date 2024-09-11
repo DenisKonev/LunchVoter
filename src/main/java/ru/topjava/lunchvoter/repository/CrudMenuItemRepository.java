@@ -10,17 +10,17 @@ import ru.topjava.lunchvoter.model.MenuItem;
 import java.util.List;
 
 @Transactional(readOnly = true)
-public interface CrudMenuItemRepository extends JpaRepository<MenuItem, Long> {
+public interface CrudMenuItemRepository extends JpaRepository<MenuItem, Integer> {
     @Modifying
     @Transactional
     @Query("DELETE FROM MenuItem mi WHERE mi.id=:id AND mi.menu.id=:menuId")
-    int delete(@Param("id") Long id, @Param("menuId") Long menuId);
+    int delete(@Param("id") Integer id, @Param("menuId") Integer menuId);
 
-    MenuItem getReferenceById(Long id);
+    MenuItem getReferenceById(Integer id);
 
     @Query("SELECT mi FROM MenuItem mi WHERE mi.menu.id=:menuId ORDER BY mi.name")
-    List<MenuItem> getAllByMenuId(@Param("menuId") Long menuId);
+    List<MenuItem> getAllByMenuId(@Param("menuId") Integer menuId);
 
     @Query("SELECT mi FROM MenuItem mi JOIN FETCH mi.menu WHERE mi.id = ?1 and mi.menu.id = ?2")
-    MenuItem getWithMenu(Long id, Long menuId);
+    MenuItem getWithMenu(Integer id, Integer menuId);
 }

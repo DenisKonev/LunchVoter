@@ -1,9 +1,9 @@
 package ru.topjava.lunchvoter.model;
 
 public interface HasId {
-    Long getId();
+    Integer getId();
 
-    void setId(Long id);
+    void setId(Integer id);
 
     default boolean isNew() {
         return getId() == null;

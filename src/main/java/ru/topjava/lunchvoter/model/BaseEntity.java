@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity implements HasId {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Integer id;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate
-    private LocalDateTime createdAt;
+    protected LocalDateTime createdAt;
 }

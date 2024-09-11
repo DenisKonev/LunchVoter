@@ -7,7 +7,7 @@ import ru.topjava.lunchvoter.model.Menu;
 import java.util.List;
 
 @Repository
-public class MenuRepository extends BaseRepository<Menu, Long> {
+public class MenuRepository extends BaseRepository<Menu, Integer> {
 
     private final CrudMenuRepository crudMenuRepository;
     private final CrudRestaurantRepository crudRestaurantRepository;
@@ -19,7 +19,7 @@ public class MenuRepository extends BaseRepository<Menu, Long> {
     }
 
     @Transactional
-    public Menu save(Menu menu, Long restaurantId) {
+    public Menu save(Menu menu, Integer restaurantId) {
         if (!menu.isNew() && get(menu.getId(), restaurantId) == null) {
             return null;
         }
@@ -27,21 +27,21 @@ public class MenuRepository extends BaseRepository<Menu, Long> {
         return crudMenuRepository.save(menu);
     }
 
-    public boolean delete(Long id, Long restaurantId) {
+    public boolean delete(Integer id, Integer restaurantId) {
         return crudMenuRepository.delete(id, restaurantId) != 0;
     }
 
-    public Menu get(Long id, Long restaurantId) {
+    public Menu get(Integer id, Integer restaurantId) {
         return crudMenuRepository.findById(id)
                 .filter(menu -> menu.getRestaurant().getId().equals(restaurantId))
                 .orElse(null);
     }
 
-    public List<Menu> getAll(Long restaurantId) {
+    public List<Menu> getAll(Integer restaurantId) {
         return crudMenuRepository.getAllByRestaurantId(restaurantId);
     }
 
-    public Menu getWithRestaurant(Long id, Long restaurantId) {
+    public Menu getWithRestaurant(Integer id, Integer restaurantId) {
         return crudMenuRepository.getWithRestaurant(id, restaurantId);
     }
 }

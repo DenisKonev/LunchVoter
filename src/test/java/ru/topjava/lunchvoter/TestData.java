@@ -7,15 +7,15 @@ import java.util.List;
 
 @UtilityClass
 public class TestData {
-    public static final Long MENU_ID = 1L;
-    public static final Long MENU_ITEM_ID_1 = 1L;
-    public static final Long MENU_ITEM_ID_2 = 2L;
-    public static final Long RESTAURANT_ID_1 = 1L;
-    public static final Long RESTAURANT_ID_2 = 2L;
-    public static final Long USER_ID_1 = 1L;
-    public static final Long USER_ID_2 = 2L;
-    public static final Long VOTE_ID_1 = 1L;
-    public static final Long VOTE_ID_2 = 2L;
+    public static final Integer MENU_ID = 1;
+    public static final Integer MENU_ITEM_ID_1 = 1;
+    public static final Integer MENU_ITEM_ID_2 = 2;
+    public static final Integer RESTAURANT_ID_1 = 1;
+    public static final Integer RESTAURANT_ID_2 = 2;
+    public static final Integer USER_ID_1 = 1;
+    public static final Integer USER_ID_2 = 2;
+    public static final Integer VOTE_ID_1 = 1;
+    public static final Integer VOTE_ID_2 = 2;
 
     public static Restaurant createRestaurant1() {
         Restaurant restaurant = new Restaurant();
@@ -68,9 +68,9 @@ public class TestData {
 
     public static List<Menu> createTestMenus() {
         Menu menu1 = createTestMenu();
-        menu1.setId(1L);
+        menu1.setId(1);
         Menu menu2 = new Menu();
-        menu2.setId(2L);
+        menu2.setId(2);
         menu2.setRestaurant(createTestRestaurant());
         return List.of(menu1, menu2);
     }

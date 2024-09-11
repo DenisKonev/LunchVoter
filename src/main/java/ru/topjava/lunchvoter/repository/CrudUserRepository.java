@@ -5,8 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.topjava.lunchvoter.model.User;
 
 @Transactional(readOnly = true)
-public interface CrudUserRepository extends JpaRepository<User, Long> {
+public interface CrudUserRepository extends JpaRepository<User, Integer> {
     User findByUsername(String username);
 
-    User getReferenceById(Long id);
+    User getReferenceById(Integer id);
 }

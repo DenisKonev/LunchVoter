@@ -7,7 +7,7 @@ import ru.topjava.lunchvoter.model.MenuItem;
 import java.util.List;
 
 @Repository
-public class MenuItemRepository extends BaseRepository<MenuItem, Long> {
+public class MenuItemRepository extends BaseRepository<MenuItem, Integer> {
 
     private final CrudMenuItemRepository crudMenuItemRepository;
     private final CrudMenuRepository crudMenuRepository;
@@ -19,7 +19,7 @@ public class MenuItemRepository extends BaseRepository<MenuItem, Long> {
     }
 
     @Transactional
-    public MenuItem save(MenuItem menuItem, Long menuId) {
+    public MenuItem save(MenuItem menuItem, Integer menuId) {
         if (!menuItem.isNew() && get(menuItem.getId(), menuId) == null) {
             return null;
         }
@@ -27,21 +27,21 @@ public class MenuItemRepository extends BaseRepository<MenuItem, Long> {
         return crudMenuItemRepository.save(menuItem);
     }
 
-    public boolean delete(Long id, Long menuId) {
+    public boolean delete(Integer id, Integer menuId) {
         return crudMenuItemRepository.delete(id, menuId) != 0;
     }
 
-    public MenuItem get(Long id, Long menuId) {
+    public MenuItem get(Integer id, Integer menuId) {
         return crudMenuItemRepository.findById(id)
                 .filter(menuItem -> menuItem.getMenu().getId().equals(menuId))
                 .orElse(null);
     }
 
-    public List<MenuItem> getAll(Long menuId) {
+    public List<MenuItem> getAll(Integer menuId) {
         return crudMenuItemRepository.getAllByMenuId(menuId);
     }
 
-    public MenuItem getWithMenu(Long id, Long menuId) {
+    public MenuItem getWithMenu(Integer id, Integer menuId) {
         return crudMenuItemRepository.getWithMenu(id, menuId);
     }
 }

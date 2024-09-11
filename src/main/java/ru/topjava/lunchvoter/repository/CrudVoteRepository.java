@@ -5,8 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.topjava.lunchvoter.model.Vote;
 
 @Transactional(readOnly = true)
-public interface CrudVoteRepository extends JpaRepository<Vote, Long> {
-    Vote findByUserId(Long userId);
+public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
+    Vote findByUserId(Integer userId);
 
-    Vote getReferenceById(Long id);
+    Vote getReferenceById(Integer id);
 }

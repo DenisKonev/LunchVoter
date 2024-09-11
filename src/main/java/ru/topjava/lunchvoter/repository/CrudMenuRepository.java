@@ -10,17 +10,17 @@ import ru.topjava.lunchvoter.model.Menu;
 import java.util.List;
 
 @Transactional(readOnly = true)
-public interface CrudMenuRepository extends JpaRepository<Menu, Long> {
+public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @Modifying
     @Transactional
     @Query("DELETE FROM Menu m WHERE m.id=:id AND m.restaurant.id=:restaurantId")
-    int delete(@Param("id") Long id, @Param("restaurantId") Long restaurantId);
+    int delete(@Param("id") Integer id, @Param("restaurantId") Integer restaurantId);
 
-    Menu getReferenceById(Long id);
+    Menu getReferenceById(Integer id);
 
     @Query("SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.createdAt DESC")
-    List<Menu> getAllByRestaurantId(@Param("restaurantId") Long restaurantId);
+    List<Menu> getAllByRestaurantId(@Param("restaurantId") Integer restaurantId);
 
     @Query("SELECT m FROM Menu m JOIN FETCH m.restaurant WHERE m.id = ?1 and m.restaurant.id = ?2")
-    Menu getWithRestaurant(Long id, Long restaurantId);
+    Menu getWithRestaurant(Integer id, Integer restaurantId);
 }

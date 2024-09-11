@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 import ru.topjava.lunchvoter.model.User;
 
 @Repository
-public class UserRepository extends BaseRepository<User, Long> {
+public class UserRepository extends BaseRepository<User, Integer> {
 
     private final CrudUserRepository crudUserRepository;
 
