@@ -76,14 +76,14 @@ class MenuItemServiceTest {
     void testUpdate() {
         MenuItem menuItem = createMenuItem1();
         when(repository.save(any(MenuItem.class), anyInt())).thenReturn(menuItem);
-        assertDoesNotThrow(() -> service.update(menuItem, MENU_ID_1));
+        assertDoesNotThrow(() -> service.update(menuItem, MENU_ID_1, menuItem.getId()));
         verify(repository, times(1)).save(any(MenuItem.class), anyInt());
     }
 
     @Test
     void testUpdateNullMenuItem() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            service.update(null, MENU_ID_1);
+            service.update(null, MENU_ID_1, null);
         });
         assertEquals("menuItem must not be null", exception.getMessage());
     }
@@ -95,14 +95,5 @@ class MenuItemServiceTest {
         MenuItem result = service.create(menuItem, MENU_ID_1);
         assertNotNull(result);
         verify(repository, times(1)).save(any(MenuItem.class), anyInt());
-    }
-
-    @Test
-    void testGetWithMenu() {
-        when(repository.getWithMenu(anyInt(), anyInt())).thenReturn(createMenuItem1());
-        MenuItem result = service.getWithMenu(MENU_ITEM_ID_1, MENU_ID_1);
-        assertNotNull(result);
-        assertEquals(MENU_ITEM_ID_1, result.getId());
-        verify(repository, times(1)).getWithMenu(anyInt(), anyInt());
     }
 }

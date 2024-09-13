@@ -66,13 +66,4 @@ class MenuItemRepositoryTest {
         assertEquals(2, fetchedMenuItems.size());
         verify(crudMenuItemRepository, times(1)).getAllByMenuId(MENU_ID_1);
     }
-
-    @Test
-    void getWithMenu() {
-        when(crudMenuItemRepository.getWithMenu(MENU_ITEM_ID_1, MENU_ID_1)).thenReturn(createMenuItem1());
-        MenuItem result = menuItemRepository.getWithMenu(MENU_ITEM_ID_1, MENU_ID_1);
-        assertNotNull(result);
-        assertEquals(MENU_ITEM_ID_1, result.getId());
-        verify(crudMenuItemRepository, times(1)).getWithMenu(MENU_ITEM_ID_1, MENU_ID_1);
-    }
 }

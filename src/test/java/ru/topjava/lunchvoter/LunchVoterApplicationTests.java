@@ -9,5 +9,4 @@ class LunchVoterApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

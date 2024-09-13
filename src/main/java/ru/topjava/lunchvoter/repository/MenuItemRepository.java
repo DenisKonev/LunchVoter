@@ -18,19 +18,6 @@ public class MenuItemRepository extends BaseRepository<MenuItem, Integer> {
         this.crudMenuRepository = crudMenuRepository;
     }
 
-    @Transactional
-    public MenuItem save(MenuItem menuItem, Integer menuId) {
-        if (!menuItem.isNew() && get(menuItem.getId(), menuId) == null) {
-            return null;
-        }
-        menuItem.setMenu(crudMenuRepository.getReferenceById(menuId));
-        return crudMenuItemRepository.save(menuItem);
-    }
-
-    public boolean delete(Integer id, Integer menuId) {
-        return crudMenuItemRepository.delete(id, menuId) != 0;
-    }
-
     public MenuItem get(Integer id, Integer menuId) {
         return crudMenuItemRepository.findById(id)
                 .filter(menuItem -> menuItem.getMenu().getId().equals(menuId))
@@ -41,7 +28,17 @@ public class MenuItemRepository extends BaseRepository<MenuItem, Integer> {
         return crudMenuItemRepository.getAllByMenuId(menuId);
     }
 
-    public MenuItem getWithMenu(Integer id, Integer menuId) {
-        return crudMenuItemRepository.getWithMenu(id, menuId);
+    @Transactional
+    public MenuItem save(MenuItem menuItem, Integer menuId) {
+        if (!menuItem.isNew() && get(menuItem.getId(), menuId) == null) {
+            return null;
+        }
+        menuItem.setMenu(crudMenuRepository.getReferenceById(menuId));
+        return crudMenuItemRepository.save(menuItem);
+    }
+
+    @Transactional
+    public boolean delete(Integer id, Integer menuId) {
+        return crudMenuItemRepository.delete(id, menuId) != 0;
     }
 }

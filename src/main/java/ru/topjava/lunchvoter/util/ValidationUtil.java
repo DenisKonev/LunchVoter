@@ -1,14 +1,15 @@
 package ru.topjava.lunchvoter.util;
 
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
 import ru.topjava.lunchvoter.exception.IllegalRequestDataException;
 import ru.topjava.lunchvoter.exception.NotFoundException;
 import ru.topjava.lunchvoter.model.HasId;
 
+import java.util.List;
 
-@NoArgsConstructor
+@UtilityClass
 public class ValidationUtil {
     public static <T> T checkNotFoundWithIdGeneric(T object, int id) {
         checkNotFoundWithId(object != null, id);
@@ -23,6 +24,13 @@ public class ValidationUtil {
         if (!found) {
             throw new NotFoundException("Not found entity with " + msg);
         }
+    }
+
+    public static <T> List<T> checkListNotEmpty(List<T> list, int menuId) {
+        if (list.isEmpty()) {
+            throw new NotFoundException("Menu with id " + menuId + " not found or has no items");
+        }
+        return list;
     }
 
     public static void checkNew(HasId bean) {

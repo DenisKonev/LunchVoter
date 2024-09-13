@@ -20,7 +20,4 @@ public interface CrudMenuItemRepository extends JpaRepository<MenuItem, Integer>
 
     @Query("SELECT mi FROM MenuItem mi WHERE mi.menu.id=:menuId ORDER BY mi.name")
     List<MenuItem> getAllByMenuId(@Param("menuId") Integer menuId);
-
-    @Query("SELECT mi FROM MenuItem mi JOIN FETCH mi.menu WHERE mi.id = ?1 and mi.menu.id = ?2")
-    MenuItem getWithMenu(Integer id, Integer menuId);
 }
