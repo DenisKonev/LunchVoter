@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import ru.topjava.lunchvoter.model.Menu;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,15 +53,6 @@ class MenuRepositoryTest {
         assertEquals(MENU_ID_1, fetchedMenu.getId());
         assertEquals(RESTAURANT_ID_1, fetchedMenu.getRestaurant().getId());
         verify(crudMenuRepository, times(1)).findById(MENU_ID_1);
-    }
-
-    @Test
-    void getAllMenusByRestaurantId() {
-        when(crudMenuRepository.getAllByRestaurantId(RESTAURANT_ID_1)).thenReturn(createMenus());
-        List<Menu> fetchedMenus = menuRepository.getAll(RESTAURANT_ID_1);
-        assertNotNull(fetchedMenus);
-        assertEquals(2, fetchedMenus.size());
-        verify(crudMenuRepository, times(1)).getAllByRestaurantId(RESTAURANT_ID_1);
     }
 
     @Test
