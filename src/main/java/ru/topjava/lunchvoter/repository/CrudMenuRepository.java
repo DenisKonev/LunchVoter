@@ -7,8 +7,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.topjava.lunchvoter.model.Menu;
 
-import java.util.List;
-
 @Transactional(readOnly = true)
 public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @Modifying
@@ -17,9 +15,6 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     int delete(@Param("id") Integer id, @Param("restaurantId") Integer restaurantId);
 
     Menu getReferenceById(Integer id);
-
-    @Query("SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.createdAt DESC")
-    List<Menu> getAllByRestaurantId(@Param("restaurantId") Integer restaurantId);
 
     @Query("SELECT m FROM Menu m JOIN FETCH m.restaurant WHERE m.id = ?1 and m.restaurant.id = ?2")
     Menu getWithRestaurant(Integer id, Integer restaurantId);

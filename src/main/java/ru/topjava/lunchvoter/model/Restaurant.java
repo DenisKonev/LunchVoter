@@ -1,11 +1,10 @@
 package ru.topjava.lunchvoter.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
@@ -16,6 +15,7 @@ public class Restaurant extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Menu> menus;
+    @OneToOne(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Menu menu;
 }

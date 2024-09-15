@@ -1,5 +1,6 @@
 package ru.topjava.lunchvoter.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,8 +13,9 @@ import java.util.List;
 @Getter
 @Setter
 public class Menu extends BaseEntity {
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "restaurant_id", nullable = false)
+    @JsonBackReference
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

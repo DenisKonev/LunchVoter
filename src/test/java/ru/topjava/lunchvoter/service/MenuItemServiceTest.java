@@ -90,10 +90,10 @@ class MenuItemServiceTest {
 
     @Test
     void testCreate() {
-        MenuItem menuItem = createMenuItem1();
-        when(repository.save(any(MenuItem.class), anyInt())).thenReturn(menuItem);
-        MenuItem result = service.create(menuItem, MENU_ID_1);
+        MenuItem menuItem = createMenuItemWithoutId();
+        when(repository.save(any(MenuItem.class), isNull())).thenReturn(menuItem);
+        MenuItem result = service.create(menuItem, null);
         assertNotNull(result);
-        verify(repository, times(1)).save(any(MenuItem.class), anyInt());
+        verify(repository, times(1)).save(any(MenuItem.class), isNull());
     }
 }

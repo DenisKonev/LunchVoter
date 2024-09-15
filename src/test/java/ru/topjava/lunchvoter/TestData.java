@@ -90,18 +90,26 @@ public class TestData {
     }
 
     public static MenuItem createMenuItem1() {
-        MenuItem menuItem = new MenuItem();
-        menuItem.setId(MENU_ITEM_ID_1);
-        menuItem.setName("Pizza");
-        menuItem.setMenu(createMenu1());
-        return menuItem;
+        return createMenuItemWithId(MENU_ITEM_ID_1, "Pizza", createMenu1());
     }
 
     public static MenuItem createMenuItem2() {
+        return createMenuItemWithId(MENU_ITEM_ID_2, "Pasta", createMenu2());
+    }
+
+    public static MenuItem createMenuItemWithoutId() {
+        return createMenuItem(null, "Salad", createMenu1());
+    }
+
+    private static MenuItem createMenuItemWithId(Integer id, String name, Menu menu) {
+        return createMenuItem(id, name, menu);
+    }
+
+    private static MenuItem createMenuItem(Integer id, String name, Menu menu) {
         MenuItem menuItem = new MenuItem();
-        menuItem.setId(MENU_ITEM_ID_2);
-        menuItem.setName("Pasta");
-        menuItem.setMenu(createMenu2());
+        menuItem.setId(id);
+        menuItem.setName(name);
+        menuItem.setMenu(menu);
         return menuItem;
     }
 

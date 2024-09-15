@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = MenuItemRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class MenuItemRestController {
-    static final String REST_URL = "/rest/menus/{menuId}/menu-items";
+    static final String REST_URL = "/menus/{menuId}/menu-items";
     private final MenuItemService service;
 
     public MenuItemRestController(MenuItemService service) {

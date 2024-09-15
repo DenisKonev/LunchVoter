@@ -6,8 +6,6 @@ import ru.topjava.lunchvoter.model.Menu;
 import ru.topjava.lunchvoter.repository.MenuRepository;
 import ru.topjava.lunchvoter.util.ValidationUtil;
 
-import java.util.List;
-
 import static ru.topjava.lunchvoter.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -25,10 +23,6 @@ public class MenuService {
 
     public void delete(Integer id, Integer restaurantId) {
         checkNotFoundWithId(repository.delete(id, restaurantId), id);
-    }
-
-    public List<Menu> getAll(Integer restaurantId) {
-        return repository.getAll(restaurantId);
     }
 
     public void update(Menu menu, Integer restaurantId) {

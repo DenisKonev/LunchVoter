@@ -9,8 +9,6 @@ import ru.topjava.lunchvoter.exception.NotFoundException;
 import ru.topjava.lunchvoter.model.Menu;
 import ru.topjava.lunchvoter.repository.MenuRepository;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -62,15 +60,6 @@ class MenuServiceTest {
             service.delete(MENU_ID_1, RESTAURANT_ID_1);
         });
         assertEquals("Not found entity with id=" + MENU_ID_1, exception.getMessage());
-    }
-
-    @Test
-    void testGetAll() {
-        when(repository.getAll(anyInt())).thenReturn(createMenus());
-        List<Menu> results = service.getAll(RESTAURANT_ID_1);
-        assertNotNull(results);
-        assertEquals(2, results.size());
-        verify(repository, times(1)).getAll(anyInt());
     }
 
     @Test

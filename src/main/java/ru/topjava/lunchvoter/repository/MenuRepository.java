@@ -4,8 +4,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.topjava.lunchvoter.model.Menu;
 
-import java.util.List;
-
 @Repository
 public class MenuRepository extends BaseRepository<Menu, Integer> {
 
@@ -35,10 +33,6 @@ public class MenuRepository extends BaseRepository<Menu, Integer> {
         return crudMenuRepository.findById(id)
                 .filter(menu -> menu.getRestaurant().getId().equals(restaurantId))
                 .orElse(null);
-    }
-
-    public List<Menu> getAll(Integer restaurantId) {
-        return crudMenuRepository.getAllByRestaurantId(restaurantId);
     }
 
     public Menu getWithRestaurant(Integer id, Integer restaurantId) {

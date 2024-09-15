@@ -7,12 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.topjava.lunchvoter.model.Menu;
 import ru.topjava.lunchvoter.service.MenuService;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = MenuRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class MenuRestController {
-    static final String REST_URL = "/rest/restaurants/{restaurantId}/menus";
+    static final String REST_URL = "/restaurants/{restaurantId}/menus";
     private final MenuService service;
 
     public MenuRestController(MenuService service) {
@@ -22,11 +20,6 @@ public class MenuRestController {
     @GetMapping("/{id}")
     public Menu get(@PathVariable int restaurantId, @PathVariable int id) {
         return service.get(id, restaurantId);
-    }
-
-    @GetMapping
-    public List<Menu> getAll(@PathVariable int restaurantId) {
-        return service.getAll(restaurantId);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
