@@ -22,7 +22,9 @@ Each restaurant provides a new menu each day.
 As a result, provide a link to github repository. It should contain the code, README.md with API documentation and
 couple curl commands to test it (**better - link to Swagger**).
 
-## Credentials
+[STARTING PAGE](http://localhost:8080)
+
+### Credentials
 
 **Login**       admin  
-**Password**    P@ssw0rd 
+**Password**    P@ssw0rd
